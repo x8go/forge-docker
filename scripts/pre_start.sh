@@ -28,10 +28,17 @@ fix_venvs() {
     /fix_venv.sh /venv /workspace/venv
 }
 
+link_models() {
+   if [[ ! -L /workspace/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors ]]; then
+       ln -s /sd-models/realisticVisionV51_v51VAE.safetensors /workspace/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors
+   fi
+}
+
 if [ "$(printf '%s\n' "$EXISTING_VERSION" "$TEMPLATE_VERSION" | sort -V | head -n 1)" = "$EXISTING_VERSION" ]; then
     if [ "$EXISTING_VERSION" != "$TEMPLATE_VERSION" ]; then
         sync_apps
         fix_venvs
+        link_models
     else
         echo "Existing version is the same as the template version, no syncing required."
     fi
