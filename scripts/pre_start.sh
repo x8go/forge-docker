@@ -29,8 +29,8 @@ fix_venvs() {
 }
 
 link_models() {
-   if [[ ! -L /workspace/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors ]]; then
-       ln -s /sd-models/realisticVisionV51_v51VAE.safetensors /workspace/stable-diffusion-webui/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors
+   if [[ ! -L /workspace/stable-diffusion-webui-forge/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors ]]; then
+       ln -s /sd-models/realisticVisionV51_v51VAE.safetensors /workspace/stable-diffusion-webui-forge/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors
    fi
 }
 
