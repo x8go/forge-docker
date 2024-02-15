@@ -101,10 +101,10 @@ RUN source /venv/bin/activate && \
 
 # Cache the Stable Diffusion Models
 # SDXL models result in OOM kills with 8GB system memory, need 30GB+ to cache these
-RUN source /venv/bin/activate && \
-    python3 cache-sd-model.py --no-half-vae --no-half --xformers --use-cpu=all --ckpt /sd-models/sd_xl_base_1.0.safetensors && \
-    python3 cache-sd-model.py --no-half-vae --no-half --xformers --use-cpu=all --ckpt /sd-models/sd_xl_refiner_1.0.safetensors && \
-    deactivate
+    #RUN source /venv/bin/activate && \
+    #    python3 cache-sd-model.py --no-half-vae --no-half --xformers --use-cpu=all --ckpt /sd-models/sd_xl_base_1.0.safetensors && \
+    #    python3 cache-sd-model.py --no-half-vae --no-half --xformers --use-cpu=all --ckpt /sd-models/sd_xl_refiner_1.0.safetensors && \
+    #    deactivate
 
 # Copy Stable Diffusion WebUI Forge config files
 COPY forge/relauncher.py forge/webui-user.sh /stable-diffusion-webui-forge/
