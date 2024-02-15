@@ -2,8 +2,8 @@
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
 ARG FORGE_COMMIT=d81e353d8928147bbd973068d0efbb2802affe0f
-ARG TORCH_VERSION=2.0.1
-ARG XFORMERS_VERSION=0.0.22
+ARG TORCH_VERSION=2.1.2
+ARG XFORMERS_VERSION=0.0.23.post1
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \

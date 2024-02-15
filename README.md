@@ -7,8 +7,8 @@
 * Python 3.10.12
 * [Stable Diffusion WebUI Forge](
   https://github.com/lllyasviel/stable-diffusion-webui-forge)
-* Torch 2.0.1
-* xformers 0.0.22
+* Torch 2.1.2
+* xformers 0.0.23.post1
 * [runpodctl](https://github.com/runpod/runpodctl)
 * [croc](https://github.com/schollz/croc)
 * [rclone](https://rclone.org/)
