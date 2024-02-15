@@ -46,6 +46,7 @@ RUN apt update && \
         htop \
         screen \
         tmux \
+        bc \
         pkg-config \
         libcairo2-dev \
         libgoogle-perftools4 \
@@ -102,7 +103,7 @@ RUN source /venv/bin/activate && \
     #    deactivate
 
 # Copy Stable Diffusion WebUI Forge config files
-COPY forge/relauncher.py forge/webui-user.sh /stable-diffusion-webui-forge/
+COPY forge/relauncher.py forge/webui-user.sh forge/config.json forge/ui-config.json /stable-diffusion-webui-forge/
 
 # ADD SDXL styles.csv
 ADD https://raw.githubusercontent.com/Douleb/SDXL-750-Styles-GPT4-/main/styles.csv /stable-diffusion-webui/styles.csv
