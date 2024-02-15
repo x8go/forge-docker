@@ -3,7 +3,7 @@
 ## Installs
 
 * Ubuntu 22.04 LTS
-* CUDA 11.8
+* CUDA 12.1
 * Python 3.10.12
 * [Stable Diffusion WebUI Forge](
   https://github.com/lllyasviel/stable-diffusion-webui-forge)
