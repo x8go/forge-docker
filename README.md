@@ -9,7 +9,10 @@
   https://github.com/lllyasviel/stable-diffusion-webui-forge)
 * Torch 2.1.2
 * xformers 0.0.23.post1
+* Jupyter Lab
 * [runpodctl](https://github.com/runpod/runpodctl)
+* [OhMyRunPod](https://github.com/kodxana/OhMyRunPod)
+* [RunPod File Uploader](https://github.com/kodxana/RunPod-FilleUploader)
 * [croc](https://github.com/schollz/croc)
 * [rclone](https://rclone.org/)
 
@@ -43,10 +46,11 @@ You can obviously substitute the image name and tag with your own.
 
 ### Ports
 
-| Connect Port | Internal Port | Description |
-|--------------|---------------|-------------|
-| 3000         | 3001          | Forge       |
-| 8888         | 8888          | Jupyter Lab |
+| Connect Port | Internal Port | Description          |
+|--------------|---------------|----------------------|
+| 3000         | 3001          | Forge                |
+| 8888         | 8888          | Jupyter Lab          |
+| 2999         | 2999          | RunPod File Uploader |
 
 ### Environment Variables
 
