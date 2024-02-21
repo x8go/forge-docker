@@ -143,11 +143,13 @@ RUN rm -f /etc/ssh/ssh_host_*
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
+# Set the template version
+ENV TEMPLATE_VERSION=1.0.2
+
 # Copy the scripts
 WORKDIR /
 COPY --chmod=755 scripts/* ./
 
 # Start the container
-ENV TEMPLATE_VERSION=1.0.2
 SHELL ["/bin/bash", "--login", "-c"]
 CMD [ "/start.sh" ]

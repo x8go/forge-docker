@@ -72,6 +72,12 @@ start_jupyter() {
     fi
 }
 
+start_runpod_uploader() {
+    echo "Starting RunPod Uploader..."
+    nohup /usr/local/bin/runpod-uploader &> /workspace/logs/runpod-uploader.log &
+    echo "RunPod Uploader started"
+}
+
 configure_filezilla() {
     # Only proceed if there is a public IP
     if [[ ! -z "${RUNPOD_PUBLIC_IP}" ]]; then
@@ -140,6 +146,7 @@ echo "Container Started, configuration in progress..."
 start_nginx
 setup_ssh
 start_jupyter
+start_runpod_uploader
 execute_script "/pre_start.sh" "Running pre-start script..."
 configure_filezilla
 export_env_vars
