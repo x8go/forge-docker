@@ -108,12 +108,18 @@ COPY forge/relauncher.py forge/webui-user.sh forge/config.json forge/ui-config.j
 # ADD SDXL styles.csv
 ADD https://raw.githubusercontent.com/Douleb/SDXL-750-Styles-GPT4-/main/styles.csv /stable-diffusion-webui/styles.csv
 
-# Install Jupyter
+# Install Jupyter, gdown and OhMyRunPod
 RUN pip3 install -U --no-cache-dir jupyterlab \
         jupyterlab_widgets \
         ipykernel \
         ipywidgets \
-        gdown
+        gdown \
+        OhMyRunPod
+
+# Install RunPod File Uploader
+RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/installer.sh -o installer.sh && \
+    chmod +x installer.sh && \
+    ./installer.sh
 
 # Install rclone
 RUN curl https://rclone.org/install.sh | bash
