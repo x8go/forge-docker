@@ -38,6 +38,7 @@ docker run -d \
   -v /workspace \
   -p 3000:3001 \
   -p 8888:8888 \
+  -p 2999:2999 \
   -e JUPYTER_PASSWORD=Jup1t3R! \
   ashleykza/forge:latest
 ```
