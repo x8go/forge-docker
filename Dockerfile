@@ -144,7 +144,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set the template version
-ENV TEMPLATE_VERSION=1.0.2
+ENV TEMPLATE_VERSION=1.0.3
 
 # Copy the scripts
 WORKDIR /
