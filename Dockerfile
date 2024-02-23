@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04 as base
 
-ARG FORGE_COMMIT=4ce60f2176e90009a4646828490d622981398f38
+ARG FORGE_COMMIT=eacb14e1157084c4bae01a6dc65a01f849408b2b
 ARG TORCH_VERSION=2.1.2
 ARG XFORMERS_VERSION=0.0.23.post1
 
@@ -144,7 +144,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set the template version
-ENV TEMPLATE_VERSION=1.0.4
+ENV TEMPLATE_VERSION=1.0.5
 
 # Copy the scripts
 WORKDIR /
