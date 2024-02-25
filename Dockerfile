@@ -1,7 +1,7 @@
 # Stage 1: Base
 FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04 as base
 
-ARG FORGE_COMMIT=eacb14e1157084c4bae01a6dc65a01f849408b2b
+ARG FORGE_COMMIT=437c348926c9ee1bfe1f147529f164bb93f731a1
 ARG TORCH_VERSION=2.1.2
 ARG XFORMERS_VERSION=0.0.23.post1
 
@@ -82,7 +82,7 @@ RUN git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git && 
 
 # Install the dependencies for Stable Diffusion WebUI Forge
 WORKDIR /stable-diffusion-webui-forge
-ENV TORCH_INDEX_URL="https://download.pytorch.org/whl/cu118"
+ENV TORCH_INDEX_URL="https://download.pytorch.org/whl/cu121"
 ENV TORCH_COMMAND="pip install torch==${TORCH_VERSION} torchvision --index-url ${TORCH_INDEX_URL}"
 ENV XFORMERS_PACKAGE="xformers==${XFORMERS_VERSION}"
 RUN source /venv/bin/activate && \
@@ -144,7 +144,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set the template version
-ENV TEMPLATE_VERSION=1.0.5
+ENV TEMPLATE_VERSION=1.0.6
 
 # Copy the scripts
 WORKDIR /
