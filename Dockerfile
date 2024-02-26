@@ -1,7 +1,9 @@
 # Stage 1: Base
 FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04 as base
 
-ARG FORGE_COMMIT=437c348926c9ee1bfe1f147529f164bb93f731a1
+# The commit is not used, its just here as a reference to where it
+# was at the last time this repo was updated.
+ARG FORGE_COMMIT=5166a723c28c35b85e3f086eb79cf061f775a1b8
 ARG TORCH_VERSION=2.1.2
 ARG XFORMERS_VERSION=0.0.23.post1
 
@@ -77,8 +79,7 @@ RUN python3 -m venv /venv
 # Clone the git repo of Stable Diffusion WebUI Forge and set version
 WORKDIR /
 RUN git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git && \
-    cd /stable-diffusion-webui-forge && \
-    git checkout ${FORGE_COMMIT}
+    cd /stable-diffusion-webui-forge
 
 # Install the dependencies for Stable Diffusion WebUI Forge
 WORKDIR /stable-diffusion-webui-forge
