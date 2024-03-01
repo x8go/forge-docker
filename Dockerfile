@@ -145,7 +145,10 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set the template version
-ENV TEMPLATE_VERSION=1.1.0
+ENV TEMPLATE_VERSION=1.1.1
+
+# Set the venv path
+ENV VENV_PATH="/workspace/venvs/stable-diffusion-webui-forge"
 
 # Copy the scripts
 WORKDIR /
