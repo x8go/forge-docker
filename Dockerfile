@@ -1,9 +1,9 @@
 # Stage 1: Base
-FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04 as base
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
 # The commit is not used, its just here as a reference to where it
 # was at the last time this repo was updated.
-ARG FORGE_COMMIT=5166a723c28c35b85e3f086eb79cf061f775a1b8
+ARG FORGE_COMMIT=29be1da7cf2b5dccfc70fbdd33eb35c56a31ffb7
 ARG TORCH_VERSION=2.1.2
 ARG XFORMERS_VERSION=0.0.23.post1
 
@@ -83,9 +83,9 @@ RUN git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git && 
 
 # Install the dependencies for Stable Diffusion WebUI Forge
 WORKDIR /stable-diffusion-webui-forge
-ENV TORCH_INDEX_URL="https://download.pytorch.org/whl/cu121"
+ENV TORCH_INDEX_URL="https://download.pytorch.org/whl/cu118"
 ENV TORCH_COMMAND="pip install torch==${TORCH_VERSION} torchvision --index-url ${TORCH_INDEX_URL}"
-ENV XFORMERS_PACKAGE="xformers==${XFORMERS_VERSION}"
+ENV XFORMERS_PACKAGE="xformers==${XFORMERS_VERSION} --index-url ${TORCH_INDEX_URL}"
 RUN source /venv/bin/activate && \
     ${TORCH_COMMAND} && \
     pip3 install -r requirements_versions.txt --extra-index-url ${TORCH_INDEX_URL} && \
@@ -126,7 +126,8 @@ RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/i
 RUN curl https://rclone.org/install.sh | bash
 
 # Install runpodctl
-RUN wget https://github.com/runpod/runpodctl/releases/download/v1.13.0/runpodctl-linux-amd64 -O runpodctl && \
+ARG RUNPODCTL_VERSION="v1.14.2"
+RUN wget "https://github.com/runpod/runpodctl/releases/download/${RUNPODCTL_VERSION}/runpodctl-linux-amd64" -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
 
@@ -145,7 +146,7 @@ COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
 # Set the template version
-ENV TEMPLATE_VERSION=1.1.1
+ENV TEMPLATE_VERSION=2.0.0
 
 # Set the venv path
 ENV VENV_PATH="/workspace/venvs/stable-diffusion-webui-forge"
