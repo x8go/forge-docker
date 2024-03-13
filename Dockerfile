@@ -1,19 +1,11 @@
 # Stage 1: Base
 FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu22.04 as base
 
-# The commit is not used, its just here as a reference to where it
-# was at the last time this repo was updated.
-ARG FORGE_COMMIT=29be1da7cf2b5dccfc70fbdd33eb35c56a31ffb7
-ARG TORCH_VERSION=2.1.2
-ARG XFORMERS_VERSION=0.0.23.post1
-
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=on \
     SHELL=/bin/bash
-
-WORKDIR /
 
 # Install Ubuntu packages
 RUN apt update && \
@@ -66,6 +58,7 @@ RUN ln -s /usr/bin/python3.10 /usr/bin/python
 # Stage 2: Install Stable Diffusion WebUI Forge and python modules
 FROM base as setup
 
+WORKDIR /
 RUN mkdir -p /sd-models
 
 # Add SDXL models and VAE
@@ -77,13 +70,16 @@ COPY realisticVisionV51_v51VAE.safetensors /sd-models/realisticVisionV51_v51VAE.
 RUN python3 -m venv /venv
 
 # Clone the git repo of Stable Diffusion WebUI Forge and set version
-WORKDIR /
+ARG FORGE_COMMIT
 RUN git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git && \
     cd /stable-diffusion-webui-forge
 
 # Install the dependencies for Stable Diffusion WebUI Forge
+ARG INDEX_URL
+ARG TORCH_VERSION
+ARG XFORMERS_VERSION
 WORKDIR /stable-diffusion-webui-forge
-ENV TORCH_INDEX_URL="https://download.pytorch.org/whl/cu118"
+ENV TORCH_INDEX_URL=${INDEX_URL}
 ENV TORCH_COMMAND="pip install torch==${TORCH_VERSION} torchvision --index-url ${TORCH_INDEX_URL}"
 ENV XFORMERS_PACKAGE="xformers==${XFORMERS_VERSION} --index-url ${TORCH_INDEX_URL}"
 RUN source /venv/bin/activate && \
@@ -126,7 +122,7 @@ RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/i
 RUN curl https://rclone.org/install.sh | bash
 
 # Install runpodctl
-ARG RUNPODCTL_VERSION="v1.14.2"
+ARG RUNPODCTL_VERSION
 RUN wget "https://github.com/runpod/runpodctl/releases/download/${RUNPODCTL_VERSION}/runpodctl-linux-amd64" -O runpodctl && \
     chmod a+x runpodctl && \
     mv runpodctl /usr/local/bin
@@ -145,11 +141,13 @@ RUN rm -f /etc/ssh/ssh_host_*
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/502.html /usr/share/nginx/html/502.html
 
-# Set the template version
-ENV TEMPLATE_VERSION=2.0.0
+# Set template version
+ARG RELEASE
+ENV TEMPLATE_VERSION=${RELEASE}
 
 # Set the venv path
-ENV VENV_PATH="/workspace/venvs/stable-diffusion-webui-forge"
+ARG VENV_PATH
+ENV VENV_PATH=${VENV_PATH}
 
 # Copy the scripts
 WORKDIR /
