@@ -22,6 +22,7 @@
 * [RunPod File Uploader](https://github.com/kodxana/RunPod-FilleUploader)
 * [croc](https://github.com/schollz/croc)
 * [rclone](https://rclone.org/)
+* [CivitAI Downloader](https://github.com/ashleykleynhans/civitai-downloader)
 
 ## Available on RunPod
 

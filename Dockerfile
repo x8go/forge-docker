@@ -134,6 +134,16 @@ RUN curl https://getcroc.schollz.com | bash
 RUN curl -s https://packagecloud.io/install/repositories/ookla/speedtest-cli/script.deb.sh | bash && \
     apt install speedtest
 
+# Install CivitAI Model Downloader
+ARG CIVITAI_DOWNLOADER_VERSION
+RUN git clone https://github.com/ashleykleynhans/civitai-downloader.git && \
+    cd civitai-downloader && \
+    git checkout tags/${CIVITAI_DOWNLOADER_VERSION} && \
+    cp download.py /usr/local/bin/download-model && \
+    chmod +x /usr/local/bin/download-model && \
+    cd .. && \
+    rm -rf civitai-downloader
+
 # Remove existing SSH host keys
 RUN rm -f /etc/ssh/ssh_host_*
 

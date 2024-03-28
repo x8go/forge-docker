@@ -24,6 +24,7 @@ target "default" {
         XFORMERS_VERSION = "0.0.23.post1+cu${CU_VERSION}"
         FORGE_COMMIT = "29be1da7cf2b5dccfc70fbdd33eb35c56a31ffb7"
         RUNPODCTL_VERSION = "v1.14.2"
+        CIVITAI_DOWNLOADER_VERSION = "2.0.1"
         VENV_PATH = "/workspace/venvs/stable-diffusion-webui-forge"
     }
 }
