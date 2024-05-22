@@ -36,7 +36,7 @@ RUN source /venv/bin/activate && \
     pip3 install ${XFORMERS_PACKAGE} &&  \
     deactivate
 
-COPY forge/cache-sd-model.py forge/install-forge.py ./
+COPY forge/cache-sd-model.py ./
 RUN source /venv/bin/activate && \
     python3 -c "from launch import prepare_environment; prepare_environment()" --skip-torch-cuda-test && \
     deactivate
