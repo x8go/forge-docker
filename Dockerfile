@@ -38,7 +38,7 @@ RUN source /venv/bin/activate && \
 
 COPY forge/cache-sd-model.py forge/install-forge.py ./
 RUN source /venv/bin/activate && \
-    python3 -m install-forge --skip-torch-cuda-test && \
+    python3 -c "from launch import prepare_environment; prepare_environment()" --skip-torch-cuda-test && \
     deactivate
 
 # Cache the Stable Diffusion Models
