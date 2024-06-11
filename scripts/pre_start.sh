@@ -17,7 +17,7 @@ sync_apps() {
     # Sync venv to workspace to support Network volumes
     echo "Syncing venv to workspace, please wait..."
     mkdir -p ${VENV_PATH}
-    mv /venv ${VENV_PATH}
+    mv /venv/* ${VENV_PATH}/
 
     # Sync application to workspace to support Network volumes
     echo "Syncing ${APP} to workspace, please wait..."
