@@ -40,6 +40,9 @@ RUN source /venv/bin/activate && \
 RUN source /venv/bin/activate && \
     pip3 install -r extensions-builtin/sd_forge_controlnet/requirements.txt && \
     pip3 install -r extensions-builtin/forge_legacy_preprocessors/requirements.txt && \
+    pip3 install insightface && \
+    pip3 uninstall -y onnxruntime && \
+    pip3 install onnxruntime-gpu && \
     deactivate
 
 COPY forge/cache-sd-model.py ./
