@@ -43,6 +43,7 @@ RUN source /venv/bin/activate && \
     pip3 install insightface && \
     pip3 uninstall -y onnxruntime && \
     pip3 install onnxruntime-gpu && \
+    pip install pydantic==1.10.11 && \
     deactivate
 
 COPY forge/cache-sd-model.py ./
