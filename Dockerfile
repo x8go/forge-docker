@@ -36,6 +36,12 @@ RUN source /venv/bin/activate && \
     pip3 install ${XFORMERS_PACKAGE} &&  \
     deactivate
 
+# Install the dependencies for the built-in extensions
+RUN source /venv/bin/activate && \
+    pip3 install -r extensions-builtin/sd_forge_controlnet/requirements.txt && \
+    pip3 install -r extensions-builtin/forge_legacy_preprocessors/requirements.txt && \
+    deactivate
+
 COPY forge/cache-sd-model.py ./
 RUN source /venv/bin/activate && \
     python3 -c "from launch import prepare_environment; prepare_environment()" --skip-torch-cuda-test && \
