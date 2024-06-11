@@ -17,11 +17,13 @@ sync_apps() {
     # Sync venv to workspace to support Network volumes
     echo "Syncing venv to workspace, please wait..."
     mkdir -p ${VENV_PATH}
-    rsync -rlptDu /venv/ ${VENV_PATH}/
+    cp -rp /venv/ ${VENV_PATH}/
+    rm -rf /venv
 
     # Sync application to workspace to support Network volumes
     echo "Syncing ${APP} to workspace, please wait..."
-    rsync -rlptDu /${APP}/ /workspace/${APP}/
+    cp -rp /${APP}/ /workspace/${APP}/
+    rm -rf /${APP}/
 
     echo "${TEMPLATE_VERSION}" > ${DOCKER_IMAGE_VERSION_FILE}
     echo "${VENV_PATH}" > "/workspace/${APP}/venv_path"
