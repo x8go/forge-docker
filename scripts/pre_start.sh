@@ -47,6 +47,9 @@ if [ "$(printf '%s\n' "$EXISTING_VERSION" "$TEMPLATE_VERSION" | sort -V | head -
         sync_apps
         fix_venvs
         link_models
+
+        # Add VENV_PATH to webui-user.sh
+         sed -i "s|venv_dir=VENV_PATH|venv_dir=${VENV_PATH}\"\"|" /workspace/stable-diffusion-webui-forge/webui-user.sh
     else
         echo "Existing version is the same as the template version, no syncing required."
     fi
