@@ -19,7 +19,7 @@ variable "CU_VERSION" {
 }
 
 variable "BASE_IMAGE_REPOSITORY" {
-    default = "x8go/runpod-base"
+    default = "ashleykza/runpod-base"
 }
 
 variable "BASE_IMAGE_VERSION" {
