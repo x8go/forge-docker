@@ -20,6 +20,13 @@ RUN python3 -m venv /venv
 # Clone the git repo of Stable Diffusion WebUI Forge and set version
 ARG FORGE_COMMIT
 RUN git clone https://huggingface.co/zuv0/SDXLF17 SD && \
+    \mv -f /SD/repositories/BLIP/_git /SD/repositories/BLIP/.git && \
+    \mv -f /SD/repositories/generative-models/_git /SD/repositories/generative-models/.git && \
+    \mv -f /SD/repositories/k-diffusion/_git /SD/repositories/k-diffusion/.git && \
+    \mv -f /SD/repositories/stable-diffusion-stability-ai/_git /SD/repositories/stable-diffusion-stability-ai/.git && \
+    \mv -f /SD/repositories/stable-diffusion-webui-assets/_git /SD/repositories/stable-diffusion-webui-assets/.git && \
+    cd /SD/extensions-builtin/forge_legacy_preprocessors/annotator/oneformer/oneformer/data && \
+    curl -L -O https://github.com/Mikubill/sd-webui-controlnet/blob/main/annotator/oneformer/oneformer/data/bpe_simple_vocab_16e6.txt.gz && \
     cd /SD
 
 # Install the dependencies for Stable Diffusion WebUI Forge
