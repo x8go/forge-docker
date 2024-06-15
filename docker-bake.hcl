@@ -3,7 +3,7 @@ variable "REGISTRY" {
 }
 
 variable "REGISTRY_USER" {
-    default = "ashleykza"
+    default = "x8go"
 }
 
 variable "APP" {
@@ -11,7 +11,7 @@ variable "APP" {
 }
 
 variable "RELEASE" {
-    default = "3.0.4"
+    default = "1.0.0"
 }
 
 variable "CU_VERSION" {
@@ -19,11 +19,11 @@ variable "CU_VERSION" {
 }
 
 variable "BASE_IMAGE_REPOSITORY" {
-    default = "ashleykza/runpod-base"
+    default = "x8go/runpod-base"
 }
 
 variable "BASE_IMAGE_VERSION" {
-    default = "1.4.0"
+    default = "1.0.0"
 }
 
 variable "CUDA_VERSION" {
@@ -46,6 +46,6 @@ target "default" {
         XFORMERS_VERSION = "0.0.26.post1"
         FORGE_COMMIT = "29be1da7cf2b5dccfc70fbdd33eb35c56a31ffb7"
         CIVITAI_DOWNLOADER_VERSION = "2.1.0"
-        VENV_PATH = "/workspace/venvs/stable-diffusion-webui-forge"
+        VENV_PATH = "/workspace/venvs/SD"
     }
 }
