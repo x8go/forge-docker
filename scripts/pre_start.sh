@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export PYTHONUNBUFFERED=1
-export APP="stable-diffusion-webui-forge"
+export APP="SD"
 DOCKER_IMAGE_VERSION_FILE="/workspace/${APP}/docker_image_version"
 
 echo "Template version: ${TEMPLATE_VERSION}"
@@ -38,9 +38,9 @@ fix_venvs() {
 }
 
 link_models() {
-   if [[ ! -L /workspace/stable-diffusion-webui-forge/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors ]]; then
-       ln -s /sd-models/realisticVisionV51_v51VAE.safetensors /workspace/stable-diffusion-webui-forge/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors
-   fi
+   #if [[ ! -L /workspace/stable-diffusion-webui-forge/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors ]]; then
+   #    ln -s /sd-models/realisticVisionV51_v51VAE.safetensors /workspace/stable-diffusion-webui-forge/models/Stable-diffusion/realisticVisionV51_v51VAE.safetensors
+   #fi
 }
 
 if [ "$(printf '%s\n' "$EXISTING_VERSION" "$TEMPLATE_VERSION" | sort -V | head -n 1)" = "$EXISTING_VERSION" ]; then
@@ -50,7 +50,7 @@ if [ "$(printf '%s\n' "$EXISTING_VERSION" "$TEMPLATE_VERSION" | sort -V | head -
         link_models
 
         # Add VENV_PATH to webui-user.sh
-         sed -i "s|venv_dir=VENV_PATH|venv_dir=${VENV_PATH}\"\"|" /workspace/stable-diffusion-webui-forge/webui-user.sh
+         sed -i "s|venv_dir=VENV_PATH|venv_dir=${VENV_PATH}\"\"|" /workspace/SD/webui-user.sh
     else
         echo "Existing version is the same as the template version, no syncing required."
     fi
