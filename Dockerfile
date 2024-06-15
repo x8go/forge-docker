@@ -12,21 +12,25 @@ RUN mkdir -p /sd-models
 # Add SDXL models and VAE
 # These need to already have been downloaded:
 #   wget https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/realisticVisionV51_v51VAE.safetensors
-COPY realisticVisionV51_v51VAE.safetensors /sd-models/realisticVisionV51_v51VAE.safetensors
+#COPY realisticVisionV51_v51VAE.safetensors /sd-models/realisticVisionV51_v51VAE.safetensors
 
 # Create and use the Python venv
 RUN python3 -m venv /venv
 
 # Clone the git repo of Stable Diffusion WebUI Forge and set version
 ARG FORGE_COMMIT
-RUN git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git && \
-    cd /stable-diffusion-webui-forge
+RUN git clone https://huggingface.co/zuv0/SDXLF17 SD && \
+    cd /SD
 
 # Install the dependencies for Stable Diffusion WebUI Forge
 ARG INDEX_URL
 ARG TORCH_VERSION
 ARG XFORMERS_VERSION
-WORKDIR /stable-diffusion-webui-forge
+WORKDIR /SD
+
+# models install
+RUN git clone https://huggingface.co/zuv0/modelsXL models
+
 ENV TORCH_INDEX_URL=${INDEX_URL}
 ENV TORCH_COMMAND="pip install torch==${TORCH_VERSION} torchvision --index-url ${TORCH_INDEX_URL}"
 ENV XFORMERS_PACKAGE="xformers==${XFORMERS_VERSION} --index-url ${TORCH_INDEX_URL}"
@@ -58,20 +62,21 @@ RUN source /venv/bin/activate && \
     #    deactivate
 
 # Copy Stable Diffusion WebUI Forge config files
-COPY forge/relauncher.py forge/webui-user.sh forge/config.json forge/ui-config.json /stable-diffusion-webui-forge/
+#COPY forge/relauncher.py forge/webui-user.sh forge/config.json forge/ui-config.json /SD/
+COPY forge/relauncher.py forge/webui-user.sh /SD/
 
 # ADD SDXL styles.csv
-ADD https://raw.githubusercontent.com/Douleb/SDXL-750-Styles-GPT4-/main/styles.csv /stable-diffusion-webui/styles.csv
+#ADD https://raw.githubusercontent.com/Douleb/SDXL-750-Styles-GPT4-/main/styles.csv /stable-diffusion-webui/styles.csv
 
 # Install CivitAI Model Downloader
-ARG CIVITAI_DOWNLOADER_VERSION
-RUN git clone https://github.com/ashleykleynhans/civitai-downloader.git && \
-    cd civitai-downloader && \
-    git checkout tags/${CIVITAI_DOWNLOADER_VERSION} && \
-    cp download.py /usr/local/bin/download-model && \
-    chmod +x /usr/local/bin/download-model && \
-    cd .. && \
-    rm -rf civitai-downloader
+#ARG CIVITAI_DOWNLOADER_VERSION
+#RUN git clone https://github.com/ashleykleynhans/civitai-downloader.git && \
+#    cd civitai-downloader && \
+#    git checkout tags/${CIVITAI_DOWNLOADER_VERSION} && \
+#    cp download.py /usr/local/bin/download-model && \
+#    chmod +x /usr/local/bin/download-model && \
+#    cd .. && \
+#    rm -rf civitai-downloader
 
 # Remove existing SSH host keys
 RUN rm -f /etc/ssh/ssh_host_*
